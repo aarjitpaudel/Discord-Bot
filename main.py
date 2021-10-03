@@ -640,124 +640,18 @@ async def _8ball(ctx, *, question):
 
 
 
-@client.command(aliases=['nepse'])
-async def NEPSE(ctx, *,question):
-    async with ctx.channel.typing():
-        async with aiohttp.ClientSession() as cs:
-            async with cs.get("https://nepse-data-api.herokuapp.com/data/todaysprice") as r:
-                data = await r.json()
-                for company in data:
-                    if company['companyName'] == question:
-                        for nepse in data:
-                            everything = ['companyName', 'noOfTransactions', 'maxPrice', 'minPrice', 'closingPrice', 'tradedShares', 'amount', 'previousClosing', 'difference']
-                            await ctx.send(everything)
+#@client.command(aliases=['nepse'])
+#async def NEPSE(ctx, *,question):
+    #async with ctx.channel.typing():
+        #async with aiohttp.ClientSession() as cs:
+            #async with cs.get("https://nepse-data-api.herokuapp.com/data/todaysprice") as r:
+                #data = await r.json()
+                #for company in data:
+                    #if company['companyName'] == question:
+                        #for nepse in data:
+                            #everything = ['companyName', 'noOfTransactions', 'maxPrice', 'minPrice', 'closingPrice', 'tradedShares', 'amount', 'previousClosing', 'difference']
+                            #await ctx.send(everything)
 
-@client.command()
-async def oclear(ctx,amount=2):
-    if ctx.message.author.id == owner_id:
-        if amount < 1000:
-            await ctx.channel.purge(limit = amount)
-            await ctx.send(f'```{amount} messages were purged```')
-        else:
-            pass
-    else:
-        pass
-    await ctx.message.delete()
-
-
-@client.command()
-async def okick(ctx, member : discord.Member, *,reason=None):
-    if ctx.message.author.id == owner_id:
-        if reason == None:
-            reason = 'no reason'
-        else:
-            reason = reason
-        await member.kick(reason=reason)
-    else:
-        pass
-    await ctx.message.delete()
-
-@client.command()
-async def oban(ctx, member : discord.Member, *,reason = "No reason"):
-    if ctx.message.author.id == owner_id:
-        await member.ban(reason = reason)
-    else:
-        pass
-    await ctx.message.delete()
-
-@client.command()
-async def owarn(ctx, member : discord.Member, *,reason = "No reason"):
-    if ctx.message.author.id == owner_id:
-        await member.send(f'You have been warned by a staff for {reason}')
-    else:
-        pass
-    await ctx.message.delete()
-
-@client.command()
-async def omute(ctx, member: discord.Member, *, reason=None):
-    if ctx.message.author.id == owner_id:
-        guild = ctx.guild
-        mutedRole = discord.utils.get(guild.roles, name="Muted")
-
-        if not mutedRole:
-            mutedRole = await guild.create_role(name="Muted")
-
-            for channel in guild.channels:
-                await channel.set_permissions(mutedRole, speak=False, send_messages=False, read_message_history=True, read_messages=False)
-        embed = discord.Embed(title="muted", description=f"{member.mention} was muted ", colour=discord.Colour.light_gray())
-        embed.add_field(name="reason:", value=reason, inline=False)
-        await member.add_roles(mutedRole, reason=reason)
-        await member.send(f" you have been muted from: {guild.name} reason: {reason}")
-    else:
-        pass
-    await ctx.message.delete()
-    
-@client.command()
-async def ounmute(ctx, member: discord.Member):
-    if ctx.message.author.id == owner_id:
-        mutedRole = discord.utils.get(ctx.guild.roles, name="Muted")
-
-        await member.remove_roles(mutedRole)
-        await member.send(f" you have unmutedd from: - {ctx.guild.name}")
-        embed = discord.Embed(title="unmute", description=f" unmuted-{member.mention}",colour=discord.Colour.light_gray())
-        await member.send(embed=embed)
-    else:
-        pass
-    await ctx.message.delete()
-
-
-@client.command()
-async def oslowmode(ctx, seconds: int):
-    if ctx.message.author.id == owner_id:
-        await ctx.channel.edit(slowmode_delay=seconds)
-    else:
-        pass
-    await ctx.message.delete()
-
-@client.command(pass_context=True)
-async def onick(ctx, member: discord.Member,* ,nick):
-    if ctx.message.author.id == owner_id:
-        await member.edit(nick=nick)
-    else:
-        pass
-    await ctx.message.delete()
-
-
-@client.command()
-async def oyt(ctx, *, search):
-    if ctx.message.author.id == owner_id:
-        try:
-            query_string = urllib.parse.urlencode({'search_query': search})
-            htm_content = urllib.request.urlopen(
-                'http://www.youtube.com/results?' + query_string)
-            search_results = re.findall(r'/watch\?v=(.{11})',
-                                        htm_content.read().decode())
-            await ctx.send('http://www.youtube.com/watch?v=' + search_results[0])
-        except:
-            pass
-    else:
-        pass
-    await ctx.message.delete()
 
 @client.command()
 async def oks(ctx):
