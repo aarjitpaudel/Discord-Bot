@@ -1,0 +1,7 @@
+json
+discord.py
+flask
+python-dotenv
+webserver
+asyncio
+discord.utils
