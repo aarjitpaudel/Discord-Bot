@@ -56,7 +56,13 @@ for filename in os.listdir('./cogs'):
         client.load_extension(f'cogs.{filename[:-3]}')
 #rules commands
 
-
+@client.event
+async def on_message(message):
+    guild = message.guild
+    if not guild:
+        channel = client.get_channel(896962112818147379)
+        await channel.send(" DM: {0.author.name} : {0.content}".format(message))
+        print("Message in Bot's DM: {0.author.name} : `{0.content}`".format(message))
 
 #welcomming member command
 @client.command(aliases=['wel'])
