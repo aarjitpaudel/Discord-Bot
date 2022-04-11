@@ -20,7 +20,7 @@ import io
 from io import BytesIO
 import requests
 
-run = True
+
 intents = discord.Intents.default()
 intents.members = True
 
@@ -28,7 +28,6 @@ intents.members = True
 
 owner_id = 778819230815748118
 prefixes="y."
-#prefix is '+'
 client = commands.Bot(command_prefix = prefixes, intents = intents)
 
     
