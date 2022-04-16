@@ -24,9 +24,6 @@ import requests
 intents = discord.Intents.default()
 intents.members = True
 
-
-
-owner_id = 778819230815748118
 prefixes="y."
 client = commands.Bot(command_prefix = prefixes, intents = intents)
 
@@ -644,23 +641,9 @@ async def _8ball(ctx, *, question):
   await ctx.send(content=f'Question: {question}\nAnswer:', embed=responses)
 
 
-
-#@client.command(aliases=['nepse'])
-#async def NEPSE(ctx, *,question):
-    #async with ctx.channel.typing():
-        #async with aiohttp.ClientSession() as cs:
-            #async with cs.get("https://nepse-data-api.herokuapp.com/data/todaysprice") as r:
-                #data = await r.json()
-                #for company in data:
-                    #if company['companyName'] == question:
-                        #for nepse in data:
-                            #everything = ['companyName', 'noOfTransactions', 'maxPrice', 'minPrice', 'closingPrice', 'tradedShares', 'amount', 'previousClosing', 'difference']
-                            #await ctx.send(everything)
-
-
 @client.command()
-async def oks(ctx):
-    await ctx.send('OKS')
+async def test(ctx):
+    await ctx.send('Nice Test')
 
 #code to connect to discord
 keep_alive()
